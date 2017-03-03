@@ -40,7 +40,7 @@ var BLUEconfig = {
 var BLUEClient = new Client.IotfDevice(BLUEconfig); 	// New Bluemix client
 var FTSclient = mqtt.connect(mqttConnectionInfo); 	// New mqtt connio client
 
-/*
+
 //Raspberry Pi Camera Object
 var camera = new raspicam({
 	mode: "photo",
@@ -63,7 +63,7 @@ setInterval(function(){
 	});
 
 }, 5000);
-*/
+
 
 // Connio target's deviceID
 // var deviceId = '_dev_776797767428231141'; 	// FTS Bear mountain LT1 17
