@@ -63,7 +63,6 @@ setInterval(function(){
 	});
 
 }, 5000);
-
 */
 
 // Connio target's deviceID
@@ -100,17 +99,6 @@ FTSclient.on('connect',function(){
 	console.log('Subscribed to ' + FireLT1 + '/properties/data') ; 			// Print to console (for troubleshooting)
 	
 });
-
-// Turning on message handler to receive messages from subscribed topics (works like an interrupt I think)
-console.log('Starting message handler');	// Print to console (for troubleshooting)
-FTSclient.on("message", function (topic, message){
-			
-	console.log('-**- A MESSAGE HAS BEEN RECEIVED! -**-'); 	// Print property data to console (for troubleshooting)
-	console.log('%s', message);
-	console.log('-************************************-');
-	msghold = message.toString(); 			// Save connio prop
-  
-  });
 
 // Turning on message handler to receive messages from subscribed topics (works like an interrupt I think)
 console.log('Starting message handler');	// Print to console (for troubleshooting)
@@ -183,16 +171,22 @@ setInterval(function (){
 
 		// ******************** END OF TEST CODE ********************
 	
-		/*
+		
 		// Publishing event using default quality of service
-		BLUEClient.publish("status","json", '{"d" : {"cpu" : 60, "mem" : 50}}');
+		BLUEClient.publish("status","json", '{"d" : {"temp" : '+temperature+'}}');
 		console.log("Status published!"); 	// Print to console (for troubleshooting)
-		*/
+		
+//ONLY FOR TESTING!!
+		console.log("Temperature: "+ temperature);
+		temperature = temperature+1;	
+		if(temperature > 40){
+			temperature = 20;
+		}
 
 		if(msgR){
 			// Publishing connio data to bluemix
 			BLUEClient.publish("data","json", JSON.stringify({"d" : {msghold}}));
-			console.log("Data published"); 		// Print to console (for troubleshooting)
+			console.log("Data published!!! CHECK BLUEMIX"); 		// Print to console (for troubleshooting)
 		}
 
 	}
@@ -204,7 +198,7 @@ setInterval(function (){
 	msgR = 0;
 	i++; // increment loop counter
 
-},10000);
+},1000);
 // Execute loop every 10 seconds
 
 
